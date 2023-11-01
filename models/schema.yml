@@ -32,6 +32,39 @@ sources:
             tests:
               - unique
               - not_null 
+      - name: adwords
+        identifier: raw_gz_adwords
+        # columns:
+        #   - name: campaign_key
+        #     description: primary key of the table
+        #     tests:
+        #       - unique
+        #       - not_null
+      - name: bing
+        identifier: raw_gz_bing
+        # columns:
+        #   - name: campaign_key
+        #     description: primary key of the table
+        #     tests:
+        #       - unique
+        #       - not_null
+      - name: facebook
+        identifier: raw_gz_facebook
+        # columns:
+        #   - name: campaign_key
+        #     description: primary key of the table
+        #     tests:
+        #       - unique
+        #       - not_null
+      - name: criteo
+        identifier: raw_gz_criteo
+        # columns:
+        #   - name: campaign_key
+        #     description: primary key of the table
+        #     tests:
+        #       - unique
+        #       - not_null
+
 models:
   - name: int_sales_margin
     tests:
@@ -80,3 +113,46 @@ models:
         description: Operational margin = margin + shipping fee - log_cost - ship_cost
   - name: finance_days
     description: finance calculation per days
+  - name: campaign
+    description: all campaign tables together
+    tests:
+      - unique:
+          column_name: "(date_date || '-' || campaign_key)"
+      - not_null:
+          column_name:
+            - date_date
+            - paid_source
+            - campaign_key
+            - campaign_name
+            - ads_cost
+            - impression
+            - click
+  - name: int_campaigns_day
+    description: all campaign tables together grouped by date
+    tests:
+      - unique:
+          column_name: "date_date"
+      - not_null:
+          column_name:
+            - date_date
+            - ads_cost
+            - impression
+            - click
+  - name: int_finance_campaigns_day
+    description: all campaign tables together grouped by date joind with the finance table
+    tests:
+      - unique:
+          column_name: "date_date"
+      - not_null:
+          column_name:
+            - nb_transactions
+            - revenue
+            - avg_basket
+            - margin
+            - operational_margin
+            - ads_margin
+            - ads_cost
+            - impression
+            - click
+
+        
