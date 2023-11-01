@@ -154,5 +154,21 @@ models:
             - ads_cost
             - impression
             - click
+  - name: int_finance_campaigns_month
+    description: all campaign tables together grouped by date joind with the finance table
+    tests:
+      - unique:
+          column_name: "period"
+      - not_null:
+          column_name:
+            - nb_transactions
+            - revenue
+            - avg_basket
+            - margin
+            - operational_margin
+            - ads_margin
+            - ads_cost
+            - impression
+            - click
 
         
