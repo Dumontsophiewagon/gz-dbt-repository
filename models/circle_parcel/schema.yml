@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw_data_circle
+    tables:
+      - name: parcel
+        identifier: raw_cc_parcel
+        description: circle parcel by stage
+        columns:
+          - name: parcel_id
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
+      - name: parcel_product
+        identifier: raw_cc_parcel_product
+        description: circle parcel by product and quantity associated
+

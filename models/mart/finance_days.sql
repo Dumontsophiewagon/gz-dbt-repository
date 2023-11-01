@@ -6,4 +6,5 @@ date_date
 ,ROUND(SUM(margin),2) as margin
 ,ROUND(SUM(operational_margin),2) as operational_margin
 FROM {{ref("int_orders_operational")}}
-GROUP BY date_date
+GROUP BY  date_date
+ORDER BY  date_date DESC
